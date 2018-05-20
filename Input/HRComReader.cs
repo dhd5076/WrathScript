@@ -16,6 +16,10 @@ namespace FrustrationBot.Input
         public HRComReader(GUI guiForm)
         {
             this.guiForm = guiForm;
+        }
+
+        public void Start()
+        {
             sp.DataReceived += new SerialDataReceivedEventHandler(Sp_DataReceived);
             sp.Open();
             Console.Read();
@@ -40,7 +44,7 @@ namespace FrustrationBot.Input
             }
             catch (Exception)
             {
-                Console.WriteLine();
+                Console.WriteLine("Error writing to graph!");
             }
             Console.Write(sp.ReadExisting());
         }

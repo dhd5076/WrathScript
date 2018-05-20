@@ -6,36 +6,8 @@ namespace FrustrationBot
     partial class GUI
     {
         private System.ComponentModel.IContainer components = null;
-        private Boolean isRunning;
-
-
-        protected override void OnLoad(EventArgs e)
-        {
-            isRunning = false;
-            base.OnLoad(e);
-        }
 
         private System.Windows.Forms.DataVisualization.Charting.Chart pulseChart;
-
-        /// <summary>
-        /// Updates the GUI with new heart rate data 
-        /// </summary>
-        /// <param name="pulseData">New pulse data points to plot</param>
-        /// <param name="BPM">The current calculated BPM of the user</param>
-        public void UpdateHeartDisplay(int pulseData, int BPM)
-        {
-            pulseChart.Invoke((MethodInvoker)(() =>
-            {
-                if (pulseChart.Series["Pulse"].Points.Count > 300)
-                {
-                    pulseChart.Series["Pulse"].Points.RemoveAt(0);
-                }
-                if (pulseData > 400 && pulseData < 650)
-                    pulseChart.Series["Pulse"].Points.Add(pulseData);
-
-                bpmLabel.Text = "BPM: " + BPM;
-            }));
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -63,6 +35,7 @@ namespace FrustrationBot
             this.panel1 = new System.Windows.Forms.Panel();
             this.bpmLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.titleText = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pulseChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -96,11 +69,12 @@ namespace FrustrationBot
             // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pictureBox.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox.Location = new System.Drawing.Point(3, 55);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(420, 372);
+            this.pictureBox.Size = new System.Drawing.Size(420, 320);
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // consoleTBox
             // 
@@ -129,16 +103,27 @@ namespace FrustrationBot
             this.bpmLabel.TabIndex = 0;
             this.bpmLabel.Text = "BPM: ";
             this.bpmLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.bpmLabel.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.titleText);
             this.panel2.Controls.Add(this.startButton);
             this.panel2.Controls.Add(this.pictureBox);
             this.panel2.Location = new System.Drawing.Point(504, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(426, 426);
             this.panel2.TabIndex = 4;
+            // 
+            // titleText
+            // 
+            this.titleText.AutoSize = true;
+            this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleText.Location = new System.Drawing.Point(3, 0);
+            this.titleText.Name = "titleText";
+            this.titleText.Size = new System.Drawing.Size(70, 25);
+            this.titleText.TabIndex = 3;
+            this.titleText.Text = "label1";
+            this.titleText.Click += new System.EventHandler(this.label1_Click_2);
             // 
             // startButton
             // 
@@ -150,7 +135,7 @@ namespace FrustrationBot
             this.startButton.TabIndex = 2;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = false;
-            this.startButton.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // GUI
             // 
@@ -169,6 +154,7 @@ namespace FrustrationBot
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +168,6 @@ namespace FrustrationBot
         private Label bpmLabel;
         private Panel panel2;
         private Button startButton;
+        private Label titleText;
     }
 }

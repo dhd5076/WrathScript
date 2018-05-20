@@ -9,16 +9,15 @@ namespace FrustrationBot
 {
     class Program
     {
-        private GUI guiForm = new GUI();
-        private HRComReader hrComReader;
-        private PostTracker postTracker;
+        private GUI guiForm;
 
         /// <summary>
-        /// Create a new program object
+        /// Create a new program object and run our main form
         /// </summary>
         private Program()
         {
-
+            guiForm = new GUI();
+            Application.Run(guiForm);
         }
 
         /// <summary>
