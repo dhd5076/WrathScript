@@ -18,6 +18,7 @@ namespace FrustrationBot
         {
             guiForm = new GUI();
             Application.Run(guiForm);
+            Console.Read();
         }
 
         /// <summary>

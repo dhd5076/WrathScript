@@ -3,6 +3,9 @@ using System.IO.Ports;
 
 namespace FrustrationBot.Input
 {
+    /// <summary>
+    /// The class responsible for reading heart rate data from a given serial port
+    /// </summary>
     class HRComReader
     {
         const string COM_PORT = "COM3";
@@ -12,12 +15,15 @@ namespace FrustrationBot.Input
         /// <summary>
         /// Makes a new heart rate serial port reader
         /// </summary>
-        /// <param name="guiForm"></param>
+        /// <param name="guiForm">The GUI to update</param>
         public HRComReader(GUI guiForm)
         {
             this.guiForm = guiForm;
         }
 
+        /// <summary>
+        /// Start reading data from the serial port
+        /// </summary>
         public void Start()
         {
             sp.DataReceived += new SerialDataReceivedEventHandler(Sp_DataReceived);
@@ -41,12 +47,7 @@ namespace FrustrationBot.Input
                 Int32.TryParse(rawData.Split(',')[2], out pulseData);
                 Int32.TryParse(rawData.Split(',')[0], out bpmData);
                 guiForm.UpdateHeartDisplay(pulseData, bpmData);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error writing to graph!");
-            }
-            Console.Write(sp.ReadExisting());
+            } catch (Exception) { }
         }
     }
 }

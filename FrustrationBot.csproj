@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\ConsoleWriter.cs" />
     <Compile Include="GUI\GUI.cs">
       <SubType>Form</SubType>
     </Compile>
